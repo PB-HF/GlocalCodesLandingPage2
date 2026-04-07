@@ -13,8 +13,8 @@
   --gradient-btn-hover: linear-gradient(90deg, #d83474 0%, #366576 100%);
 
   /* Typography */
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Manrope', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Roboto Serif', Georgia, serif;
 
   /* Layout */
   --container-width: 1400px;
@@ -2277,3 +2277,9 @@ section:not(.hero-section):not(.stat-section):not(.footerstat-section), .footer-
     text-align: center;
   }
 }
+
+/* Added for Big Texts */
+h1, h2, h3, h4, h5, h6, .hero-title, .hero-v2-title, .result-title, .version-title, .cta-title, .stat-number, .widget-header, .v-step-title, .process-step-title {
+  font-family: var(--font-serif) !important;
+}
+
