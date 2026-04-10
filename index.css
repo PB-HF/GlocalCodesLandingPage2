@@ -30,6 +30,12 @@ html {
   scroll-behavior: smooth;
 }
 
+@media (min-width: 1024px) {
+  html {
+    zoom: 0.85; /* Reduces the overall scale on desktop screens */
+  }
+}
+
 body {
   font-family: var(--font-sans);
   background-color: var(--bg-color);
@@ -56,6 +62,7 @@ section:not(.hero-section):not(.stat-section):not(.footerstat-section),
   width: 100%;
   min-height: 100vh;
   overflow: hidden;
+  background: linear-gradient(to bottom, #ffffff, #fcf6f6);
 }
 
 /* Base Container */
@@ -69,19 +76,7 @@ section:not(.hero-section):not(.stat-section):not(.footerstat-section),
 
 /* Hero Background Image */
 .background-mesh {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 150%;
-  z-index: 0;
-  pointer-events: none;
-  background-image: url('bg-hero.png');
-  background-size: 100% 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, transparent 280px, black 500px);
-  mask-image: linear-gradient(to bottom, transparent 0%, transparent 20px, black 500px);
+  display: none;
 }
 
 /* Header */
@@ -1239,11 +1234,7 @@ section:not(.hero-section):not(.stat-section):not(.footerstat-section),
    ================================== */
 .footer-section {
   position: relative;
-  background-image: url('bg-hero.png');
-  background-size: cover;
-  background-position: center;
-  background-color: #111;
-  /* fallback color */
+  background: linear-gradient(to bottom, #ffffff, #fcf6f6);
   display: flex;
   align-items: center;
   min-height: 15vh;
@@ -1348,15 +1339,32 @@ section:not(.hero-section):not(.stat-section):not(.footerstat-section),
    Hero V2 (index specific)
    ================================== */
 .hero-v2 {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "badge badge"
+    "title title"
+    "subtitle ."
+    "actions calendly";
+  gap: 0 30px;
   min-height: auto;
   padding: 0 0 60px 0;
 }
 
+.hero-v2-top-badge { grid-area: badge; }
+.hero-v2-title-container { grid-area: title; }
+.hero-v2-subtitle-container { grid-area: subtitle; }
+.hero-v2-actions-container { grid-area: actions; }
+.hero-v2-right-calendly { grid-area: calendly; }
+
 @media (max-width: 900px) {
   .hero-v2 {
+    display: flex;
+    flex-direction: column;
     padding: 0 0 40px 0;
+  }
+  .hero-v2-right-calendly {
+    order: 4; /* Appears after title and subtitle */
   }
 }
 
@@ -1388,21 +1396,21 @@ section:not(.hero-section):not(.stat-section):not(.footerstat-section),
   color: var(--brand-pink);
   margin-bottom: 24px;
 }
-
+/* 🔴 */
 .hero-v2-title {
-  font-size: 60px;
-  line-height: 1.1;
+  font-size: 80px;
+  line-height: 1.05;
   font-family: var(--font-serif);
   font-weight: 700;
   color: var(--text-main);
-  margin-bottom: 20px;
-  letter-spacing: -1px;
+  margin-bottom: 24px;
+  letter-spacing: -3px;
 }
 
 .highlight-underline {
   font-style: italic;
   font-family: var(--font-serif);
-  border-bottom: 3px solid #da3732;
+  border-bottom: 4px solid #da3732;
   position: relative;
   display: inline-block;
   color: #da3732;
@@ -1410,7 +1418,8 @@ section:not(.hero-section):not(.stat-section):not(.footerstat-section),
 
 @media (max-width: 768px) {
   .hero-v2-title {
-    font-size: 40px;
+    font-size: 56px;
+    letter-spacing: -2px;
   }
 }
 
@@ -2400,11 +2409,10 @@ h6,
   display: grid !important;
   grid-template-columns: 1fr 1fr;
   grid-template-areas:
-    "badge empty"
-    "title right"
-    "subtitle right"
-    "actions right"
-    "stats empty4" !important;
+    "badge badge"
+    "title title"
+    "subtitle ."
+    "actions right" !important;
   gap: 0 40px !important;
   align-items: stretch;
 }
@@ -2440,10 +2448,9 @@ h6,
     grid-template-areas:
       "badge"
       "title"
-      "right"
       "subtitle"
       "actions"
-      "stats" !important;
+      "right" !important;
   }
 }
 /* ==================================
